@@ -1,0 +1,63 @@
+<templateSet group="lee">
+  <template name="cls" value="/** &#10; * &lt;p&gt;&#10; * Copyright (C), 2010-2020, 广州广电运通智能科技有限公司&#10; * &lt;/p&gt;&#10; * @fileName      $fileName$&#10; * @author        $USER$&#10; * @date          $DATE$ $TIME$&#10; * @description   TODO&#10; * History:&#10; * &lt;author&gt;      &lt;time&gt;          &lt;version&gt;          &lt;desc&gt;&#10; * 作者姓名       修改时间         版本号            描述&#10; */" shortcut="ENTER" description="class注释" toReformat="false" toShortenFQNames="true">
+    <variable name="fileName" expression="fileName()" defaultValue="" alwaysStopAt="true" />
+    <variable name="USER" expression="user()" defaultValue="lee" alwaysStopAt="true" />
+    <variable name="DATE" expression="date()" defaultValue="" alwaysStopAt="true" />
+    <variable name="TIME" expression="time()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="export" value="    @PostMapping(value = &quot;/export&quot;, produces = &quot;application/json;charset=utf-8&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息导出&quot;, notes = &quot;xxx - xxx信息导出&quot;, httpMethod = &quot;POST&quot;, response = Response.class)&#10;    public &lt;T&gt; Response&lt;T&gt; exportExcel(@Valid @RequestBody BaseQuery dto, HttpServletResponse resp) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息导出&quot;);&#10;            // 业务代码 TODO&#10;            List&lt;Object&gt; rows = new ArrayList&lt;&gt;();&#10;            ExcelUtil&lt;Object&gt; excelUtil = new ExcelUtil&lt;&gt;(Object.class);&#10;            excelUtil.exportExcel(rows, resp, &quot;object&quot;);&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息导出失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.EXPORT_ERROR);&#10;        }&#10;    }" shortcut="ENTER" description="控制器-导出excel表格接口" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="import" value="    @PostMapping(value = &quot;/import&quot;, produces = &quot;application/json;charset=utf-8&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息导出&quot;, notes = &quot;xxx - xxx信息导出&quot;, httpMethod = &quot;POST&quot;, response = Response.class)&#10;    public &lt;T&gt; Response&lt;T&gt; importExcel(MultipartFile file) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息导入&quot;);&#10;            if (file == null) {&#10;                log.debug(&quot;xxx - xxx信息导入上传文件为空&quot;);&#10;                return new Response&lt;T&gt;().err(ResponseCode.IMPORT_FILE_EMPTY);&#10;            }&#10;            ExcelUtil&lt;Object&gt; excelUtil = new ExcelUtil&lt;&gt;(Object.class);&#10;            List&lt;Object&gt; rows = excelUtil.importExcel(file.getInputStream());&#10;            // 业务代码 TODO&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息导入失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.IMPORT_ERROR);&#10;        }&#10;    }" shortcut="ENTER" description="控制器-导入excel数据接口" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="exportTemplate" value="    @PostMapping(value = &quot;/exportTemplate&quot;, produces = &quot;application/json;charset=utf-8&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息模板导出&quot;, notes = &quot;xxx - xxx信息模板导出&quot;, httpMethod = &quot;POST&quot;, response = Response.class)&#10;    public &lt;T&gt; Response&lt;T&gt; exportExcelTemplate(HttpServletResponse resp) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息模板导出&quot;);&#10;            // 业务代码 TODO&#10;            ExcelUtil&lt;Object&gt; excelUtil = new ExcelUtil&lt;&gt;(Object.class);&#10;            excelUtil.exportExcel(null, resp, &quot;object&quot;);&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息模板导出失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.EXPORT_ERROR);&#10;        }&#10;    }" shortcut="ENTER" description="控制器-excel模板导出接口" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="delete" value="    @DeleteMapping(value = &quot;/delete/{id}&quot;, produces = &quot;application/json;charset=utf-8&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息删除&quot;, notes = &quot;xxx - xxx信息删除&quot;, httpMethod = &quot;DELETE&quot;, response = Response.class)&#10;    public &lt;T&gt; Response&lt;T&gt; delete(@NotBlank(message = &quot;{required}&quot;) @PathVariable String id) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息删除&quot;);&#10;            // 业务代码 TODO&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息删除失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.DELETE_ERROR);&#10;        }&#10;    }" shortcut="ENTER" description="控制器-删除接口" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="add" value="    @PostMapping(value = &quot;/add&quot;, produces = &quot;application/json;charset=utf-8&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息添加&quot;, notes = &quot;xxx - xxx信息添加&quot;, httpMethod = &quot;POST&quot;, response = Response.class)&#10;    public &lt;T&gt; Response&lt;T&gt; add(@Valid @RequestBody BaseAdd dto) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息添加&quot;);&#10;            // 业务代码 TODO&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息添加失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.INSERT_ERROR);&#10;        }&#10;    }" shortcut="ENTER" description="控制器-添加接口" toReformat="false" toShortenFQNames="true" />
+  <template name="enable" value="    @PutMapping(value = &quot;/enable&quot;, produces = &quot;application/json;charset=utf-8&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息状态更新&quot;, notes = &quot;xxx - xxx信息状态更新&quot;, httpMethod = &quot;PUT&quot;, response = Response.class)&#10;    public &lt;T&gt; Response&lt;T&gt; enable(@Valid @RequestBody BaseUpdate dto) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息状态更新&quot;);&#10;            // 业务代码 TODO&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息状态更新失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.UPDATE_ERROR);&#10;        }&#10;    }&#10;" shortcut="ENTER" description="控制器-状态更新接口" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="update" value="    @PutMapping(value = &quot;/update&quot;, produces = &quot;application/json;charset=utf-8&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息更新&quot;, notes = &quot;xxx - xxx信息更新&quot;, httpMethod = &quot;PUT&quot;, response = Response.class)&#10;    public &lt;T&gt; Response&lt;T&gt; update(@Valid @RequestBody BaseUpdate dto) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息更新&quot;);&#10;            // 业务代码 TODO&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息更新失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.UPDATE_ERROR);&#10;        }&#10;    }" description="控制器-更新接口" toReformat="false" toShortenFQNames="true" />
+  <template name="getOne" value="    @GetMapping(value = &quot;/getOne/{id}&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息详情查询&quot;, notes = &quot;xxx - xxx信息详情查询&quot;, httpMethod = &quot;GET&quot;, response = Response.class)&#10;    @ApiImplicitParam(value = &quot;xxx id&quot;, name = &quot;id&quot;, required = true, example = &quot;1&quot;)&#10;    public &lt;T&gt; Response&lt;T&gt; getOne(@NotBlank(message = &quot;{required}&quot;) @PathVariable String id) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息详情查询&quot;);&#10;            // 业务代码 TODO&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息详情查询失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.QUERY_ERROR);&#10;        }&#10;    }" shortcut="ENTER" description="控制器-详情查询接口" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="listPage" value="    @GetMapping(value = &quot;/listPage&quot;)&#10;    @JsonView()&#10;    @ApiOperation(value = &quot;xxx - xxx信息分页查询&quot;, notes = &quot;xxx - xxx信息分页查询&quot;, httpMethod = &quot;GET&quot;, response = Response.class)&#10;    public &lt;T&gt; Response&lt;T&gt; listPage(BaseQuery dto) {&#10;        try {&#10;            log.debug(&quot;xxx - xxx信息分页查询&quot;);&#10;            // 业务代码 TODO&#10;            return new Response&lt;T&gt;();&#10;        } catch (ConsumerException ce) {&#10;            return new Response&lt;T&gt;().error(ce);&#10;        } catch (Exception e) {&#10;            log.error(&quot;xxx - xxx信息分页查询失败：{}&quot;, ExceptionUtils.getStackTrace(e));&#10;            return new Response&lt;T&gt;().err(ResponseCode.QUERY_ERROR);&#10;        }&#10;    }" shortcut="ENTER" description="控制器-分页接口" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="@rest" value="@Slf4j&#10;@RestController&#10;@RequestMapping(&quot;/xxx&quot;)&#10;@Api(description = &quot;xxx-前端控制器&quot;)" shortcut="ENTER" description="控制器-RestController类注解" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="@data" value="@EqualsAndHashCode(callSuper = false)&#10;@Data&#10;@Accessors(chain = true)&#10;@ApiModel(description = &quot;xxx实体&quot;)" shortcut="ENTER" description="实体类注解" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="@service" value="@Slf4j&#10;@Service(&quot;xxxService&quot;)&#10;@Transactional(propagation = Propagation.SUPPORTS, rollbackFor = {ConsumerException.class, Exception.class})" shortcut="ENTER" description="业务实现类注解" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>
